@@ -1,0 +1,43 @@
+﻿@model telefonRehberi.calisanlar
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>calisanlar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soyad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soyad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

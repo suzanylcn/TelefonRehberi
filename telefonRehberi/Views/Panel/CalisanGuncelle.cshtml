@@ -1,0 +1,109 @@
+﻿@model telefonRehberi.calisanlar
+
+@{
+	ViewBag.Title = "CalisanGuncelle";
+	Layout = "~/Views/_PanelLayoutPage1.cshtml";
+}
+
+<h4>Calisan Guncelle</h4>
+
+@using (Html.BeginForm("CalisanGuncelleDb", "Panel"))
+
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		<hr />
+		<input type="hidden" name="id" value="@Model.id" />
+
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.ad, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.ad, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.ad, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.soyad, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.soyad, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.soyad, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.tel, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-10">
+				@Html.EditorFor(model => model.tel, new { htmlAttributes = new { @class = "form-control" } })
+				@Html.ValidationMessageFor(model => model.tel, "", new { @class = "text-danger" })
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2">Departmanı</label>
+			<div class="col-md-10">
+				<select class="form-control" name="departmanId">
+					<option value="0">DepartmanId Seçiniz</option>
+					@{
+						foreach (var item in (List<departman>)ViewBag.DepartmanListem)
+						{
+
+							if (item.id == Model.departmanId)
+							{
+
+										<option value="@item.id" selected>@item.departmanAdi </option>
+							}
+
+							else
+							{
+								<option value="@item.id"> @item.departmanAdi </option>
+							}
+
+
+						}
+					}
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Yönetici Adı</label>
+			<div class="col-md-10">
+				<select class="form-control" name="yoneticiId">
+					<option value="0">Yönetici Seçiniz</option>
+					@{
+						foreach (var item in (List<calisanlar>)ViewBag.CalisanListem)
+						{
+							
+							if (item.id == Model.yoneticiId)
+							{
+								<option value="@item.id" selected>@item.ad</option>
+							}
+							else
+							{
+								<option value="@item.id">@item.ad</option>
+							}
+						}
+
+					}
+				</select>
+			</div>
+		</div>
+
+
+	
+
+
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Kaydet" class="btn btn-warning" />
+			</div>
+		</div>
+	</div>
+
+}
+<div>
+	@Html.ActionLink("Back to List", "Index")
+</div>

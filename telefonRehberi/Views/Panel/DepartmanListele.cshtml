@@ -1,0 +1,45 @@
+﻿@model IEnumerable<telefonRehberi.departman>
+
+@{
+	ViewBag.Title = "DepartmanListele";
+	Layout = "~/Views/_PanelLayoutPage1.cshtml";
+}
+
+<h4>Departman Listele</h4>
+
+<p>
+	@Html.ActionLink("Departman Ekle", "DepartmanEkle", "Panel")
+</p>
+
+@{
+	if (ViewBag.mesaj != "")
+	{
+		<label class="alert alert-danger">
+			@ViewBag.mesaj
+		</label>
+	}
+}
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.departmanAdi)
+		</th>
+		<th>İşlem</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.departmanAdi)
+			</td>
+			<td>
+
+				@Html.ActionLink("Düzenle", "DepartmanGuncelle", new { id = item.id }, new { @class = "btn btn-warning" })
+				@Html.ActionLink("Sil", "DepartmanSil", new { id = item.id }, new { @class = "btn btn-info" })
+			</td>
+		</tr>
+	}
+
+</table>

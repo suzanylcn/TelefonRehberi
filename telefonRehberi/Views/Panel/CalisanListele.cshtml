@@ -1,0 +1,71 @@
+﻿@model IEnumerable<telefonRehberi.calisanlar>
+
+@{
+	ViewBag.Title = "CalisanListele";
+	Layout = "~/Views/_PanelLayoutPage1.cshtml";
+}
+
+<h4>Çalışan Listele</h4>
+
+<p>
+	@Html.ActionLink("Çalışan Ekle", "CalisanEkle")
+</p>
+
+@{
+	if (ViewBag.mesaj != "")
+	{
+		<label class="alert alert-danger">
+			@ViewBag.mesaj
+		</label>
+	}
+}
+
+
+
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.ad)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.soyad)
+		</th>
+		<th>
+			Telefon
+		</th>
+		<th>
+			Departman Adı
+		</th>
+		<th>
+			Yönetici Adı
+		</th>
+		<th>İşlem</th>
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.ad)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.soyad)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.tel)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.departman.departmanAdi)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.calisanlar2.ad)
+			</td>
+			<td>
+
+				@Html.ActionLink("Düzenle", "CalisanGuncelle", new { id = item.id }, new { @class = "btn btn-warning" })
+				@Html.ActionLink("Sil", "CalisanSil", new { id = item.id }, new { @class = "btn btn-info" })
+			</td>
+		</tr>
+	}
+
+</table>

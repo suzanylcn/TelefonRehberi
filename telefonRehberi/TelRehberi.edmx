@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="rehberModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="calisanlar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="departmanId" Type="int" Nullable="false" />
+          <Property Name="yoneticiId" Type="int" />
+        </EntityType>
+        <EntityType Name="departman">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departmanAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="sifre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tarih" Type="date" />
+        </EntityType>
+        <Association Name="FK_calisanlar_calisanlar">
+          <End Role="calisanlar" Type="Self.calisanlar" Multiplicity="0..1" />
+          <End Role="calisanlar1" Type="Self.calisanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="calisanlar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calisanlar1">
+              <PropertyRef Name="yoneticiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calisanlar_departman">
+          <End Role="departman" Type="Self.departman" Multiplicity="1" />
+          <End Role="calisanlar" Type="Self.calisanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departman">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calisanlar">
+              <PropertyRef Name="departmanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="rehberModelStoreContainer">
+          <EntitySet Name="calisanlar" EntityType="Self.calisanlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="departman" EntityType="Self.departman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_calisanlar_calisanlar" Association="Self.FK_calisanlar_calisanlar">
+            <End Role="calisanlar" EntitySet="calisanlar" />
+            <End Role="calisanlar1" EntitySet="calisanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calisanlar_departman" Association="Self.FK_calisanlar_departman">
+            <End Role="departman" EntitySet="departman" />
+            <End Role="calisanlar" EntitySet="calisanlar" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="rehberModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="rehberEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="calisanlar" EntityType="rehberModel.calisanlar" />
+          <EntitySet Name="departman" EntityType="rehberModel.departman" />
+          <AssociationSet Name="FK_calisanlar_calisanlar" Association="rehberModel.FK_calisanlar_calisanlar">
+            <End Role="calisanlar" EntitySet="calisanlar" />
+            <End Role="calisanlar1" EntitySet="calisanlar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_calisanlar_departman" Association="rehberModel.FK_calisanlar_departman">
+            <End Role="departman" EntitySet="departman" />
+            <End Role="calisanlar" EntitySet="calisanlar" />
+          </AssociationSet>
+          <EntitySet Name="Login" EntityType="rehberModel.Login" />
+        </EntityContainer>
+        <EntityType Name="calisanlar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="soyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="departmanId" Type="Int32" Nullable="false" />
+          <Property Name="yoneticiId" Type="Int32" />
+          <NavigationProperty Name="calisanlar1" Relationship="rehberModel.FK_calisanlar_calisanlar" FromRole="calisanlar" ToRole="calisanlar1" />
+          <NavigationProperty Name="calisanlar2" Relationship="rehberModel.FK_calisanlar_calisanlar" FromRole="calisanlar1" ToRole="calisanlar" />
+          <NavigationProperty Name="departman" Relationship="rehberModel.FK_calisanlar_departman" FromRole="calisanlar" ToRole="departman" />
+        </EntityType>
+        <EntityType Name="departman">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departmanAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="calisanlar" Relationship="rehberModel.FK_calisanlar_departman" FromRole="departman" ToRole="calisanlar" />
+        </EntityType>
+        <Association Name="FK_calisanlar_calisanlar">
+          <End Type="rehberModel.calisanlar" Role="calisanlar" Multiplicity="0..1" />
+          <End Type="rehberModel.calisanlar" Role="calisanlar1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="calisanlar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calisanlar1">
+              <PropertyRef Name="yoneticiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_calisanlar_departman">
+          <End Type="rehberModel.departman" Role="departman" Multiplicity="1" />
+          <End Type="rehberModel.calisanlar" Role="calisanlar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departman">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="calisanlar">
+              <PropertyRef Name="departmanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciAdi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sifre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tarih" Type="DateTime" Precision="0" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="rehberModelStoreContainer" CdmEntityContainer="rehberEntities">
+          <EntitySetMapping Name="calisanlar">
+            <EntityTypeMapping TypeName="rehberModel.calisanlar">
+              <MappingFragment StoreEntitySet="calisanlar">
+                <ScalarProperty Name="yoneticiId" ColumnName="yoneticiId" />
+                <ScalarProperty Name="departmanId" ColumnName="departmanId" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="soyad" ColumnName="soyad" />
+                <ScalarProperty Name="ad" ColumnName="ad" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="departman">
+            <EntityTypeMapping TypeName="rehberModel.departman">
+              <MappingFragment StoreEntitySet="departman">
+                <ScalarProperty Name="departmanAdi" ColumnName="departmanAdi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="rehberModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,37 @@
+﻿@model telefonRehberi.departman
+
+@{
+    ViewBag.Title = "DepartmanGuncelle";
+    Layout = "~/Views/_PanelLayoutPage1.cshtml";
+}
+
+<h4>Departman Guncelle</h4>
+
+@using (Html.BeginForm("DepartmanGuncelleDb","Panel"))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>departman</h4>
+        <hr />
+		<input type="hidden" name="id" value="@Model.id" />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.departmanAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.departmanAdi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.departmanAdi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-warning" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
